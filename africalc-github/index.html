@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b2530" />
+    <meta name="description" content="AfriCalc: حاسبة مجانية لتحديد رأس مال استيراد المنتجات من دبي إلى دول إفريقيا وسعر البيع المناسب بنظام الدفع عند الاستلام." />
+    <title>AfriCalc | حاسبة تكاليف التجارة الإلكترونية في إفريقيا</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar" aria-label="رأس الصفحة">
+        <a href="#top" class="brand" aria-label="AfriCalc - الصفحة الرئيسية">
+          <span class="brand-icon" aria-hidden="true">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M9 30V17l11-7 11 7v13H9Z" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+              <path d="m9 17 11 7 11-7M20 24v6" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="m15 11 5-3 5 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span class="brand-wordmark"><strong>AfriCalc</strong><small>COD BUSINESS TOOLS</small></span>
+        </a>
+        <div class="topbar-badge"><span class="live-dot"></span> أداة مجانية • بدون تسجيل</div>
+      </header>
+
+      <main id="top">
+        <section class="hero" aria-labelledby="heroTitle">
+          <div class="hero-decoration hero-decoration--one"></div>
+          <div class="hero-decoration hero-decoration--two"></div>
+          <div class="hero-content">
+            <div class="eyebrow"><span class="eyebrow-line"></span> خَطِّط بذكاء قبل أن تبدأ البيع</div>
+            <h1 id="heroTitle">اعرف <span>رأس مالك</span>، وحدّد <span>سعر بيعك</span> بثقة.</h1>
+            <p>حاسبة بسيطة لتقدير تكلفة استيراد منتج من دبي إلى إفريقيا، واحتساب سعر بيعه بناءً على المصاريف والربح الذي تريده.</p>
+            <div class="hero-tags" aria-label="مميزات الحاسبة">
+              <span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m5 12 4 4L19 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg> 13 دولة إفريقية</span>
+              <span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v9l6 3M12 22a10 10 0 1 0-10-10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> حساب فوري</span>
+              <span><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg> تفاصيل شفافة للتكلفة</span>
+            </div>
+          </div>
+          <div class="hero-side" aria-hidden="true">
+            <div class="mini-card mini-card--back"><span>DESTINATION</span><b>🌍 AFRICA</b></div>
+            <div class="mini-card mini-card--front">
+              <div class="mini-top"><span class="mini-chart-icon">↗</span><span>SMART PRICING</span></div>
+              <div class="mini-bars"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+              <span class="mini-caption">FROM COST TO PROFIT</span>
+            </div>
+          </div>
+        </section>
+
+        <div class="section-heading">
+          <div><p class="overline">حاسبة التكلفة</p><h2>ابدأ حسابات منتجك</h2></div>
+          <span class="currency-note">جميع الأرقام <strong>بالدرهم المغربي (MAD)</strong></span>
+        </div>
+
+        <div class="calculator-grid">
+          <section class="panel form-panel" aria-labelledby="formTitle">
+            <div class="panel-head"><span class="step-number">01</span><div><h3 id="formTitle">بيانات المنتج والاستيراد</h3><p>أدخل المعلومات الأساسية، وسنتكفل بالحساب.</p></div></div>
+            <form id="calcForm" novalidate>
+              <div class="field field-full">
+                <label for="country">الدولة المستهدفة <span class="required">*</span></label>
+                <div class="control select-wrap">
+                  <select id="country" name="country" required>
+                    <option value="">اختر الدولة التي تريد البيع فيها</option>
+                  </select>
+                </div>
+                <p class="field-note" id="countryNote">سنملأ تكلفة الشحن ورسوم الخدمة تلقائياً بعد اختيار الدولة.</p>
+              </div>
+
+              <div class="rates-strip" id="ratesStrip" aria-live="polite">
+                <div><span class="rates-label">الشحن من دبي / كغ</span><strong id="shippingRate">—</strong></div>
+                <div class="rates-divider"></div>
+                <div><span class="rates-label">رسوم الخدمة / طلب</span><strong id="serviceRateLabel">—</strong></div>
+              </div>
+
+              <div class="form-grid">
+                <div class="field"><label for="unitPrice">ثمن المنتج الواحد <span class="required">*</span></label><div class="control"><input id="unitPrice" name="unitPrice" type="number" inputmode="decimal" min="0.01" step="any" placeholder="مثال: 65" required /><span class="input-unit">MAD</span></div></div>
+                <div class="field"><label for="quantity">عدد المنتجات <span class="required">*</span></label><div class="control"><input id="quantity" name="quantity" type="number" inputmode="numeric" min="1" max="1000000" step="1" placeholder="مثال: 10" required /><span class="input-unit">قطعة</span></div></div>
+                <div class="field"><label for="weight">وزن المنتج الواحد <span class="required">*</span></label><div class="control weight-control"><input id="weight" name="weight" type="number" inputmode="decimal" min="0.001" step="any" placeholder="مثال: 350" required /><select id="weightUnit" name="weightUnit" aria-label="وحدة الوزن"><option value="g">غرام</option><option value="kg">كيلوغرام</option></select></div></div>
+                <div class="field"><label for="serviceFee">رسوم الخدمة للطلب <span class="required">*</span></label><div class="control"><input id="serviceFee" name="serviceFee" type="number" inputmode="decimal" min="0" step="any" placeholder="تُملأ تلقائياً" required /><span class="input-unit">MAD</span></div></div>
+              </div>
+
+              <div class="form-divider"><span>التسويق والربح</span></div>
+              <div class="form-grid">
+                <div class="field"><label for="adsCost">تكلفة الإعلان لكل طلب مُباع <span class="required">*</span></label><div class="control"><input id="adsCost" name="adsCost" type="number" inputmode="decimal" min="0" step="any" placeholder="مثال: 25" required /><span class="input-unit">MAD</span></div><p class="field-note">تكلفة الحصول على طلب ناجح، وليس ميزانية الحملة كلها.</p></div>
+                <div class="field"><label for="profit">الربح المطلوب لكل قطعة <span class="required">*</span></label><div class="control"><input id="profit" name="profit" type="number" inputmode="decimal" min="0" step="any" placeholder="مثال: 60" required /><span class="input-unit">MAD</span></div><p class="field-note">الربح المستهدف بعد التكاليف المدخلة.</p></div>
+              </div>
+
+              <div id="formMessage" class="form-message" role="status" aria-live="polite"></div>
+              <div class="form-actions"><button class="btn btn-primary" type="submit"><span>احسب الآن</span><span aria-hidden="true">←</span></button><button class="btn btn-secondary" id="fillExample" type="button">جرّب مثالاً</button><button class="btn btn-ghost" id="clearForm" type="button">مسح</button></div>
+            </form>
+          </section>
+
+          <section class="results-panel" aria-labelledby="resultsTitle">
+            <div class="results-head"><div><p class="overline">نتائج الحساب</p><h2 id="resultsTitle">الملخص المالي</h2></div><span class="result-status" id="resultStatus"><span></span> في انتظار البيانات</span></div>
+            <div class="metric-grid">
+              <article class="metric-card metric-card--capital"><div class="metric-icon" aria-hidden="true">◈</div><span class="metric-label">رأس مال الاستيراد</span><div class="metric-value"><strong id="capitalValue">—</strong><span>MAD</span></div><p>شراء جميع المنتجات + شحنها من دبي</p></article>
+              <article class="metric-card metric-card--price"><div class="metric-icon" aria-hidden="true">↗</div><span class="metric-label">سعر البيع المطلوب للقطعة</span><div class="metric-value"><strong id="sellingPriceValue">—</strong><span>MAD</span></div><p>لتغطية التكاليف وتحقيق الربح المستهدف</p></article>
+            </div>
+
+            <div class="panel breakdown-panel">
+              <div class="breakdown-title"><div><h3>تفاصيل سعر بيع القطعة</h3><p>كيف يتوزع سعر البيع على المصاريف والربح؟</p></div><span class="breakdown-mini">لكل قطعة</span></div>
+              <div class="breakdown-content">
+                <div class="donut" id="donut" role="img" aria-label="رسم بياني لتوزيع سعر بيع القطعة"><div class="donut-hole"><span>إجمالي السعر</span><strong id="donutTotal">—</strong><small>MAD</small></div></div>
+                <dl class="cost-list">
+                  <div><dt><i style="--dot:#143947"></i> تكلفة المنتج</dt><dd id="detailProduct">—</dd></div>
+                  <div><dt><i style="--dot:#28af86"></i> الشحن للقطعة</dt><dd id="detailShipping">—</dd></div>
+                  <div><dt><i style="--dot:#eda85b"></i> رسوم الخدمة</dt><dd id="detailService">—</dd></div>
+                  <div><dt><i style="--dot:#7778e5"></i> الإعلانات</dt><dd id="detailAds">—</dd></div>
+                  <div class="profit-line"><dt><i style="--dot:#e96d78"></i> <strong>ربحك المستهدف</strong></dt><dd id="detailProfit">—</dd></div>
+                </dl>
+              </div>
+            </div>
+
+            <div class="panel totals-panel"><h3>ملخص الكمية كاملة</h3><dl><div><dt>إجمالي تكلفة شراء المنتجات</dt><dd id="totalProducts">—</dd></div><div><dt>الوزن الإجمالي للشحنة</dt><dd id="totalWeight">—</dd></div><div><dt>إجمالي تكلفة شحن المنتجات</dt><dd id="totalShipping">—</dd></div><div><dt>الربح المستهدف إذا بعت كل الكمية</dt><dd class="green-value" id="totalProfit">—</dd></div></dl><button id="copyReport" class="btn btn-outline" type="button" disabled><svg viewBox="0 0 24 24" aria-hidden="true" fill="none"><rect x="8" y="8" width="12" height="12" rx="2" stroke="currentColor" stroke-width="1.7"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2" stroke="currentColor" stroke-width="1.7"/></svg><span id="copyLabel">نسخ تقرير الحساب</span></button></div>
+          </section>
+        </div>
+        <section class="method-panel" aria-labelledby="methodTitle"><div class="method-icon">i</div><div><h3 id="methodTitle">مهم قبل اتخاذ قرار الاستيراد</h3><p><strong>رأس مال الاستيراد</strong> هنا يشمل ثمن المخزون والشحن فقط، ولا يشمل الميزانية الإعلانية المسبقة. تُحتسب رسوم الخدمة والإعلانات داخل سعر البيع لكل قطعة. قد توجد مصاريف إضافية غير مشمولة، مثل الجمارك والضرائب ورسوم التحويل والمرتجعات وتغيّر سعر الشحن أو اعتماد الوزن الحجمي والحد الأدنى المحاسَب؛ تحقّق منها مع المورّد وشركة الخدمات. الأسعار المستخدمة هي القيم التي زُوّدت بها الحاسبة ويمكن تعديلها لاحقاً.</p></div></section>
+      </main>
+      <footer class="footer"><div class="footer-brand">◈ <strong>AfriCalc</strong> <span>— قرارات تجارية أذكى</span></div><span>صُممت لأصحاب مشاريع التجارة الإلكترونية بنظام COD في إفريقيا</span></footer>
+    </div>
+  </body>
+</html>
