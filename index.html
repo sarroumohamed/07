@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0e2925" />
+  <meta name="description" content="AfriCalc: حاسبة رأس مال الاستيراد وسعر البيع في إفريقيا، للشحن من دبي أو الصين." />
+  <title>AfriCalc — حاسبة التجارة الإلكترونية في إفريقيا</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <div class="brand" aria-label="AfriCalc">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="m3.5 7.5 8.5-4 8.5 4v9L12 21l-8.5-4.5v-9Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="m3.8 7.6 8.2 4.2 8.2-4.2M12 11.8V21" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        </span>
+        <span class="brand-type">Afri<span>Calc</span><small>أداة التجارة الإلكترونية</small></span>
+      </div>
+      <span class="header-note"><span class="note-dot"></span> مجانية · بدون تسجيل</span>
+    </header>
+
+    <main>
+      <div class="intro">
+        <div class="eyebrow">حساب سريع، قرار أوضح</div>
+        <h1>كم تحتاج لتبدأ؟ <span>وبكم تبيع؟</span></h1>
+        <p>أدخل بيانات منتجك، واحصل على رأس مال الاستيراد وسعر البيع المناسب في ثوانٍ.</p>
+      </div>
+
+      <div class="workspace">
+        <section class="form-card" aria-labelledby="formTitle">
+          <div class="card-heading"><span class="heading-icon" aria-hidden="true">↗</span><h2 id="formTitle">بيانات منتجك</h2></div>
+
+          <div class="field-group">
+            <label for="country">الدولة التي ستبيع فيها</label>
+            <div class="select-holder"><select id="country" required><option value="">اختر الدولة</option></select></div>
+          </div>
+
+          <div class="field-group">
+            <label>الشحن من</label>
+            <div class="origin-switch" role="group" aria-label="بلد إرسال الشحنة">
+              <button type="button" class="origin-choice active" data-origin="dubai" aria-pressed="true"><span>🇦🇪</span> دبي</button>
+              <button type="button" class="origin-choice" data-origin="china" aria-pressed="false"><span>🇨🇳</span> الصين</button>
+            </div>
+          </div>
+
+          <div id="batteryBox" class="field-group hidden">
+            <label for="shipmentType">نوع الشحنة</label>
+            <div class="select-holder"><select id="shipmentType"><option value="normal">منتج عادي</option><option value="special">بطاريات أو سوائل</option></select></div>
+          </div>
+
+          <div class="rate-bar" id="rateBar" aria-live="polite">
+            <div class="rate-item"><small>الشحن / كغ</small><b id="rateShipping">اختر الدولة</b></div>
+            <span class="rate-separator"></span>
+            <div class="rate-item"><small>الخدمة / طلب</small><b id="rateService">—</b></div>
+          </div>
+
+          <div id="manualShippingWrap" class="field-group manual-shipping hidden">
+            <label for="manualShipping">تعريفة الشحن من الصين (درهم / كغ)</label>
+            <input id="manualShipping" type="number" min="0" step="any" inputmode="decimal" placeholder="أدخل تعريفة الشحن" />
+            <p class="input-note">لم تتوفر تعريفة لهذه الدولة في الملف المرفق.</p>
+          </div>
+
+          <div class="input-grid">
+            <div class="field-group"><label for="unitPrice">ثمن القطعة</label><div class="input-holder"><input id="unitPrice" type="number" min="0" step="any" inputmode="decimal" placeholder="مثال: 65" /><span>درهم</span></div></div>
+            <div class="field-group"><label for="quantity">عدد القطع</label><div class="input-holder"><input id="quantity" type="number" min="1" step="1" inputmode="numeric" placeholder="مثال: 10" /><span>قطعة</span></div></div>
+            <div class="field-group"><label for="weight">وزن القطعة</label><div class="input-holder has-select"><input id="weight" type="number" min="0" step="any" inputmode="decimal" placeholder="مثال: 350" /><select id="weightUnit" aria-label="وحدة الوزن"><option value="g">غرام</option><option value="kg">كغ</option></select></div></div>
+            <div class="field-group"><label for="adsCost">الإعلان لكل طلب ناجح</label><div class="input-holder"><input id="adsCost" type="number" min="0" step="any" inputmode="decimal" placeholder="مثال: 25" /><span>درهم</span></div></div>
+            <div class="field-group full"><label for="profit">الربح المطلوب لكل قطعة</label><div class="input-holder"><input id="profit" type="number" min="0" step="any" inputmode="decimal" placeholder="مثال: 60" /><span>درهم</span></div></div>
+          </div>
+
+          <details id="fxDetails" class="fx-box hidden">
+            <summary>تعديل سعر الصرف <span id="fxState" class="fx-state"></span></summary>
+            <div class="fx-content">
+              <label for="fxInput" id="fxLabel">قيمة وحدة العملة بالدرهم</label>
+              <div class="input-holder"><input id="fxInput" type="number" min="0.00000001" step="any" inputmode="decimal" /><span>درهم</span></div>
+              <button type="button" id="resetFx" class="text-button">استخدم سعر الصرف التلقائي</button>
+              <small id="fxDate"></small>
+            </div>
+          </details>
+        </section>
+
+        <section class="results-card" aria-labelledby="resultsTitle">
+          <div class="card-heading results-heading"><span class="heading-icon" aria-hidden="true">✓</span><h2 id="resultsTitle">النتيجة</h2><span class="auto-tag">تتحدث تلقائياً</span></div>
+          <div class="results-inner" aria-live="polite" aria-atomic="true">
+            <div class="result-block primary-result">
+              <div class="result-label">رأس مال الاستيراد</div>
+              <div class="result-amount"><b id="capitalValue">—</b><span>درهم</span></div>
+              <div class="result-explain">شراء جميع القطع + شحنها</div>
+            </div>
+            <div class="result-block secondary-result">
+              <div class="result-label">سعر بيع القطعة</div>
+              <div class="result-amount"><b id="saleValue">—</b><span>درهم</span></div>
+              <div class="result-explain">يشمل الخدمة والإعلان والربح المطلوب</div>
+            </div>
+          </div>
+          <p id="statusMessage" class="status-message" role="status">اختر الدولة وأدخل الأرقام لإظهار النتيجة.</p>
+
+          <details id="detailsBreakdown" class="breakdown" disabled>
+            <summary>عرض تفاصيل الحساب <span>⌄</span></summary>
+            <dl>
+              <div><dt>شراء المنتجات</dt><dd id="purchaseTotal">—</dd></div>
+              <div><dt>شحن المنتجات</dt><dd id="shippingTotal">—</dd></div>
+              <div><dt>تكلفة القطعة مع الشحن</dt><dd id="landedPrice">—</dd></div>
+              <div><dt>الخدمة لكل طلب</dt><dd id="serviceDetail">—</dd></div>
+              <div><dt>الإعلان لكل طلب</dt><dd id="adsDetail">—</dd></div>
+              <div><dt>الربح المطلوب للقطعة</dt><dd id="profitDetail">—</dd></div>
+            </dl>
+          </details>
+          <p class="caveat">الحساب تقديري. رأس مال الاستيراد لا يشمل ميزانية الإعلانات المسبقة أو أي رسوم إضافية غير مذكورة.</p>
+        </section>
+      </div>
+
+      <p class="bottom-note">الأسعار مرجعية وقابلة للتغيير. تحقق من أسعار الشحن والخدمة قبل شراء المخزون.</p>
+    </main>
+    <footer>AfriCalc <span>·</span> صُنع لتبسيط حسابات التجارة الإلكترونية في إفريقيا</footer>
+  </div>
+</body>
+</html>
